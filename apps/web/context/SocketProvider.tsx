@@ -40,8 +40,11 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
     setMessages((prev) => [...prev, message]);
   }, []);
 
+  // console.log(import.meta.env.NEXT_PUBLIC_REDIS_PORT);
   useEffect(() => {
-    const _socket = io('https://scalable-chat-app-server.onrender.com');
+    const _socket = io(
+      process.env.NEXT_PUBLIC_LINK ? process.env.NEXT_PUBLIC_LINK : ''
+    );
     _socket.on('message', onMessageRec);
 
     setSocket(_socket);
